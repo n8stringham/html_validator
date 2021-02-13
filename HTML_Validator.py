@@ -1,5 +1,7 @@
 #!/bin/python3
 
+import re
+
 
 def validate_html(html):
     '''
@@ -64,4 +66,11 @@ def _extract_tags(html):
                 tags.append(html[start:end])
         if len(tags) == 0:
             tags.append(html[start:])
-    return tags
+    clean_tags = []
+    for t in tags:
+        if re.search('^<.* .*>$', t):
+            tag_no_attr = re.sub(' .*>$', re.search(' .*>', t).group()[-1], t)
+            clean_tags.append(tag_no_attr)
+        else:
+            clean_tags.append(t)
+    return clean_tags
