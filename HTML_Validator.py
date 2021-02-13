@@ -62,7 +62,7 @@ def _extract_tags(html):
             if symbol == '<':
                 start = i
             if symbol == '>':
-                end = i+1
+                end = i + 1
                 tags.append(html[start:end])
         if len(tags) == 0:
             tags.append(html[start:])
